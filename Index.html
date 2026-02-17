@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>나랑 결혼해줄래?</title>
+    <style>
+        body {
+            font-family: 'Pretendard', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #fff0f5; /* 연한 핑크색 배경 */
+            text-align: center;
+        }
+        .container {
+            background: white;
+            padding: 50px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #ff4d6d;
+            margin-bottom: 30px;
+        }
+        .buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+        button {
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        #yesBtn {
+            background-color: #ff4d6d;
+            color: white;
+        }
+        #noBtn {
+            background-color: #f0f0f0;
+            color: #555;
+        }
+        #result {
+            margin-top: 30px;
+            font-size: 1.5rem;
+            color: #ff4d6d;
+            font-weight: bold;
+            display: none; /* 처음엔 숨김 */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1 id="question">나랑 결혼해줄래?</h1>
+        
+        <div class="buttons" id="buttonGroup">
+            <button id="yesBtn" onclick="showLove()">예</button>
+            <button id="noBtn" onmouseover="changeToYes()">아니오</button>
+        </div>
+
+        <div id="result">종신계약되었습니다♡</div>
+    </div>
+
+    <script>
+        // '아니오' 버튼에 마우스를 올리거나 터치하면 실행되는 함수
+        function changeToYes() {
+            const noBtn = document.getElementById('noBtn');
+            noBtn.innerText = "예";
+            noBtn.style.backgroundColor = "#ff4d6d";
+            noBtn.style.color = "white";
+            
+            // '아니오'였던 버튼을 클릭해도 성공 메시지가 뜨도록 변경
+            noBtn.onclick = showLove;
+        }
+
+        // '예'를 눌렀을 때 실행되는 함수
+        function showLove() {
+            document.getElementById('question').innerText = "고마워요! 🥰";
+            document.getElementById('buttonGroup').style.display = "none"; // 버튼 숨기기
+            document.getElementById('result').style.display = "block";    // 결과 메시지 표시
+        }
+    </script>
+
+</body>
+</html>
