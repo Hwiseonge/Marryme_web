@@ -1,101 +1,83 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>나랑 결혼해줄래?</title>
-    <style>
-        body {
-            font-family: 'Pretendard', sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #fff0f5;
-            text-align: center;
-        }
-        .container {
-            background: white;
-            padding: 50px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            width: 300px;
-        }
-        h1 {
-            color: #ff4d6d;
-            margin-bottom: 30px;
-            font-size: 1.5rem;
-        }
-        .buttons {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-        }
-        button {
-            padding: 12px 30px;
-            font-size: 1.1rem;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            min-width: 100px;
-        }
-        #yesBtn {
-            background-color: #ff4d6d;
-            color: white;
-        }
-        #noBtn {
-            background-color: #f0f0f0;
-            color: #555;
-        }
-        #result {
-            margin-top: 20px;
-            font-size: 1.4rem;
-            color: #ff4d6d;
-            font-weight: bold;
-            display: none;
-            line-height: 1.6;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>완벽한 설계</title>
+<style>
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: #fff0f5;
+    font-family: sans-serif;
+    text-align: center;
+}
+
+.container {
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+button {
+    padding: 12px 30px;
+    margin: 10px;
+    font-size: 18px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.yes {
+    background: #ff4d6d;
+    color: white;
+}
+
+.no {
+    background: #ddd;
+}
+</style>
 </head>
 <body>
 
-    <div class="container">
-        <h1 id="question">나랑 결혼해줄래?</h1>
-        
-        <div class="buttons" id="buttonGroup">
-            <button id="yesBtn" onclick="showLove()">예</button>
-            <button id="noBtn" onclick="changeToYes()">아니오</button>
-        </div>
-
-        <div id="result">🎊 축하합니다! 🎊<br>종신계약되었습니다♡</div>
+<div class="container">
+    <h1 id="question">나랑 결혼해줄래?</h1>
+    
+    <div id="buttons">
+        <button class="yes" onclick="accept()">예</button>
+        <button class="no" onclick="forceAccept()">아니오</button>
     </div>
 
-    <script>
-        // 1. '아니오'를 눌렀을 때 실행되는 함수
-        function changeToYes() {
-            const noBtn = document.getElementById('noBtn');
-            
-            // 버튼 텍스트를 '예'로 바꾸고 스타일 변경
-            noBtn.innerText = "예";
-            noBtn.style.backgroundColor = "#ff4d6d";
-            noBtn.style.color = "white";
-            
-            // 이제 이 버튼을 누르면 최종 메시지가 뜨도록 함수 연결 변경
-            noBtn.onclick = showLove;
-            
-            // 깜짝 효과: 질문 살짝 변경 (선택 사항)
-            document.getElementById('question').innerText = "오잉? '예'밖에 없네?";
-        }
+    <h2 id="result" style="display:none; color:#ff4d6d;">
+        🎊 종신 계약 완료 🎊
+    </h2>
+</div>
 
-        // 2. 최종적으로 '예'를 눌렀을 때 실행되는 함수
-        function showLove() {
-            document.getElementById('question').innerText = "YES! ❤️";
-            document.getElementById('buttonGroup').style.display = "none"; // 버튼들 숨기기
-            document.getElementById('result').style.display = "block";    // 결과 메시지 등장
-        }
-    </script>
+<script>
+function forceAccept() {
+    const buttons = document.querySelectorAll("button");
+    
+    buttons.forEach(btn => {
+        btn.innerText = "예";
+        btn.classList.remove("no");
+        btn.classList.add("yes");
+        btn.onclick = accept;
+    });
+
+    document.getElementById("question").innerText = 
+        "거절은없어🥰";
+}
+
+function accept() {
+    document.getElementById("buttons").style.display = "none";
+    document.getElementById("question").innerText = "YES ❤️";
+    document.getElementById("result").style.display = "block";
+}
+</script>
 
 </body>
 </html>
